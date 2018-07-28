@@ -31,6 +31,9 @@ for (let i = 0; i < cards.length; i++){
 
 	// Card click event
 	card.addEventListener("click", function(){
+		let currentCard = this;
+		let previousCard = openCards[0];
+
 		// One card has already been opened
 		if(openCards.length === 1){
 			card.classList.add("open", "show");
@@ -40,8 +43,8 @@ for (let i = 0; i < cards.length; i++){
 
 			if (this.innerHTML === openCards[0].innerHTML){
 				// Matched
-				this.classList.add("match");
-				openCards[0].classList.add("match");
+				currentCard.classList.add("match");
+				previousCard.classList.add("match");
 
 				openCards = [];
 				matchedCards += 2;
@@ -49,12 +52,14 @@ for (let i = 0; i < cards.length; i++){
 				gameOver();
 
 			} else{
-				this.classList.remove("open", "show");
-				openCards[0].classList.remove("open", "show");
-
 				openCards = [];
+				setTimeout(function() {
+					currentCard.classList.remove("open", "show");
+					previousCard.classList.remove("open", "show");
+				}, 500);
 			}
-		} else { // no card has been opened
+		} else { 
+		// no card has been opened
 			card.classList.add("open", "show");
 			openCards.push(this);
 		}
