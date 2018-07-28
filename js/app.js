@@ -18,6 +18,7 @@ const cards = [
 	"fa fa-bicycle"];
 
 let openCards = [];
+let matchedCards = 0;
 
 const cardsContainer = document.querySelector(".deck");
 
@@ -36,12 +37,16 @@ for (let i = 0; i < cards.length; i++){
 			openCards.push(this);
 
 			// Compare our 2 opened cards
+
 			if (this.innerHTML === openCards[0].innerHTML){
-				
+				// Matched
 				this.classList.add("match");
 				openCards[0].classList.add("match");
 
 				openCards = [];
+				matchedCards += 2;
+				// Check if the game is over
+				gameOver();
 
 			} else{
 				this.classList.remove("open", "show");
@@ -56,9 +61,13 @@ for (let i = 0; i < cards.length; i++){
 	});
 }
 
-function compare() {
-
+// Check if the game is over
+function gameOver() {
+	if (matchedCards === cards.length) {
+		alert("Game Over!")
+	}
 }
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
