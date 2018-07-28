@@ -24,7 +24,7 @@ li {
     flex-direction: column;
 }
 
-.playingField {
+.deck {
 	height: 80%;
 	width: 500px;
 	display: flex;
@@ -38,7 +38,7 @@ li {
     padding: 16px;
 }
 
-.playingField .card {
+.deck .card {
 	height: 100px;
 	width: 100px;
 	cursor: pointer;
@@ -52,16 +52,22 @@ li {
 	margin: 10px;
 }
 
-.playingField .card.open {
+.deck .card.open {
 	transform: rotateX(0);
 	background: #02b3e4;
 	cursor: default;
 }
 
-.playingField .card.show {
+.deck .card.show {
 	font-size: 33px;
 	color: #ffffff;
 }
+
+.deck .card.match {
+	background-color: #80c9be;
+	cursor: default;
+}
+
 
 /*
  * Score panel styles
@@ -89,3 +95,4 @@ li {
     float: right;
     cursor: pointer;
 }
+

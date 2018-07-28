@@ -37,15 +37,27 @@ for (let i = 0; i < cards.length; i++){
 
 			// Compare our 2 opened cards
 			if (this.innerHTML === openCards[0].innerHTML){
-				console.log("Matched!");
+				
+				this.classList.add("match");
+				openCards[0].classList.add("match");
+
+				openCards = [];
+
 			} else{
-				console.log("Doesn't match!");
+				this.classList.remove("open", "show");
+				openCards[0].classList.remove("open", "show");
+
+				openCards = [];
 			}
 		} else { // no card has been opened
 			card.classList.add("open", "show");
 			openCards.push(this);
 		}
 	});
+}
+
+function compare() {
+
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
