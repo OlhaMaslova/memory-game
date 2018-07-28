@@ -52,6 +52,17 @@ li {
 	margin: 10px;
 }
 
+.playingField .card.open {
+	transform: rotateX(0);
+	background: #02b3e4;
+	cursor: default;
+}
+
+.playingField .card.show {
+	font-size: 33px;
+	color: #ffffff;
+}
+
 /*
  * Score panel styles
  */
