@@ -25,6 +25,7 @@ const cardsContainer = document.querySelector(".deck");
 // Start the game for the first time
 shuffle(cards);
 init();
+$(".card").on("click", start());
 
 /*
  * Initialize the game
@@ -40,15 +41,6 @@ function init() {
 
 		// Add click event to each card
 		click(card);
-	}
-}
-
-/*
- * Check if the game is over
- */
-function gameOver() {
-	if (matchedCards === cards.length) {
-		alert("Game Over!")
 	}
 }
 
@@ -168,4 +160,33 @@ restartBtn.addEventListener("click", function() {
 	moves = 0;
 })
 
+/*
+ * Check if the game is over
+ */
+function gameOver() {
+	
+	if (matchedCards === cards.length) {
+		end();
+		alert("Game Over!")
+	}
+}
 
+/*
+ * Elapse game playing time. 
+ * Inspired by https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript/41633001#comment70466060_41633001
+ */
+var startTime, endTime;
+function start() {
+	startTime = new Date();
+}
+
+function end() {
+	endTime = new Date();
+	//elapsed time in ms
+	var timeDiff = endTime - startTime; 
+	// strip the ms
+	timeDiff /= 1000;
+
+	var seconds = Math.round(timeDiff);
+	console.log(seconds + " seconds");
+}
