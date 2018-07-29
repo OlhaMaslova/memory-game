@@ -109,3 +109,17 @@ function shuffle(array) {
     return array;
 }
 
+/*
+ * Restart Button
+ */
+const restartBtn = document.querySelector(".restart");
+restartBtn.addEventListener("click", function() {
+	// Delete all cards
+	cardsContainer.innerHTML = "";
+
+	// Call 'init' to create new cards
+	init();
+
+	// Reset all related variables
+	matchedCards = [];
+})
