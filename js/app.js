@@ -23,6 +23,7 @@ let matchedCards = 0;
 const cardsContainer = document.querySelector(".deck");
 
 // Start the game for the first time
+shuffle(cards);
 init();
 
 /*
@@ -155,6 +156,9 @@ restartBtn.addEventListener("click", function() {
 								<li><i class="fa fa-star"></i></li>`;
 	// Reset moves
 	movesContainer.innerHTML = 0;
+
+	// Call shuffle
+	shuffle(cards);
 
 	// Call 'init' to create new cards
 	init();
