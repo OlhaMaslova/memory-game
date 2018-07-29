@@ -88,6 +88,9 @@ function click(card) {
 		// no card has been opened
 			card.classList.add("open", "show", "disabled");
 			openCards.push(this);
+
+			// Add new move
+			addMove();
 		}
 	});
 }
@@ -107,6 +110,16 @@ function shuffle(array) {
     }
 
     return array;
+}
+
+/*
+ * Moves
+ */
+let moves = 0;
+const movesContainer = document.querySelector(".moves");
+function addMove() {
+	moves++;
+	movesContainer.innerHTML = moves;
 }
 
 /*
