@@ -113,13 +113,32 @@ function shuffle(array) {
 }
 
 /*
+ * Rating
+ */
+const starsContainer = document.querySelector(".stars");
+function rating() {
+	switch(moves){
+		case 10: 
+			starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
+				<li><i class="fa fa-star"></i></li>`;
+			break;
+		case 15:
+			starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>`;
+	}
+}
+
+/*
  * Moves
  */
 let moves = 0;
 const movesContainer = document.querySelector(".moves");
+movesContainer.innerHTML = 0;
 function addMove() {
 	moves++;
 	movesContainer.innerHTML = moves;
+
+	// Set rating
+	rating();
 }
 
 /*
@@ -130,9 +149,19 @@ restartBtn.addEventListener("click", function() {
 	// Delete all cards
 	cardsContainer.innerHTML = "";
 
+	// Reset rating
+	starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
+								<li><i class="fa fa-star"></i></li>
+								<li><i class="fa fa-star"></i></li>`;
+	// Reset moves
+	movesContainer.innerHTML = 0;
+
 	// Call 'init' to create new cards
 	init();
 
 	// Reset all related variables
 	matchedCards = [];
+	moves = 0;
 })
+
+
