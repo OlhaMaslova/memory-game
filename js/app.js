@@ -30,7 +30,6 @@ $(".card").on("click", start());
 /*
  * Initialize the game
  */
-
 function init() {
 	// Create a deck of cards
 	for (let i = 0; i < cards.length; i++){
@@ -105,18 +104,26 @@ function shuffle(array) {
     return array;
 }
 
+
+///// Score Panel
+
+
 /*
  * Rating
  */
 const starsContainer = document.querySelector(".stars");
+var stars = 3; 
 function rating() {
 	switch(moves){
-		case 10: 
+		case 16: 
 			starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
 				<li><i class="fa fa-star"></i></li>`;
+			stars = 2;
 			break;
-		case 15:
+		case 26:
 			starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>`;
+			stars = 1;
+			break;
 	}
 }
 
@@ -135,47 +142,10 @@ function addMove() {
 }
 
 /*
- * Restart Button
- */
-const restartBtn = document.querySelector(".restart");
-restartBtn.addEventListener("click", function() {
-	// Delete all cards
-	cardsContainer.innerHTML = "";
-
-	// Reset rating
-	starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
-								<li><i class="fa fa-star"></i></li>
-								<li><i class="fa fa-star"></i></li>`;
-	// Reset moves
-	movesContainer.innerHTML = 0;
-
-	// Call shuffle
-	shuffle(cards);
-
-	// Call 'init' to create new cards
-	init();
-
-	// Reset all related variables
-	matchedCards = [];
-	moves = 0;
-})
-
-/*
- * Check if the game is over
- */
-function gameOver() {
-	
-	if (matchedCards === cards.length) {
-		end();
-		alert("Game Over!")
-	}
-}
-
-/*
  * Elapse game playing time. 
  * Inspired by https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript/41633001#comment70466060_41633001
  */
-var startTime, endTime;
+var startTime, endTime, seconds;
 function start() {
 	startTime = new Date();
 }
@@ -187,6 +157,63 @@ function end() {
 	// strip the ms
 	timeDiff /= 1000;
 
-	var seconds = Math.round(timeDiff);
+	seconds = Math.round(timeDiff);
 	console.log(seconds + " seconds");
 }
+
+/*
+ * Restart Button
+ */
+const restartBtn = document.querySelector(".restart");
+restartBtn.addEventListener("click", restartGame);
+
+
+
+function restartGame() {
+	// Delete all cards
+	cardsContainer.innerHTML = "";
+	// Reset rating
+	starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
+								<li><i class="fa fa-star"></i></li>
+								<li><i class="fa fa-star"></i></li>`;
+	//Hide modal window
+	modal.classList.remove("showModal");
+	// Reset moves
+	movesContainer.innerHTML = 0;
+	// Call shuffle
+	shuffle(cards);
+	// Call 'init' to create new cards
+	init();
+	// Reset all related variables
+	matchedCards = [];
+	moves = 0;
+	stars = 3;
+	seconds = 0;
+}
+
+/*
+ * Check if the game is over
+ */
+var modal = document.querySelector(".modal");
+function gameOver() {
+	var content = document.querySelector(".content");
+
+	var totalMoves = document.querySelector(".movesValue");
+	var totalStars = document.querySelector(".ratingValue");
+	var totalTime = document.querySelector(".timeValue");
+	if (matchedCards === cards.length) {
+		end();
+		modal.classList.add("showModal");
+		totalMoves.innerHTML = moves; 
+		totalStars.innerHTML = stars;
+		totalTime.innerHTML = seconds;
+	}
+}
+
+
+/*
+ * Modal view
+ * Play again button
+ */
+const playAgain = document.querySelector(".playAgain");
+playAgain.addEventListener("click", restartGame);
