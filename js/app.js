@@ -1,3 +1,5 @@
+// Variables declaration
+
 // List of all cards
 const cards = [
 	"fa fa-ambulance",
@@ -17,10 +19,20 @@ const cards = [
 	"fa fa-motorcycle",
 	"fa fa-bicycle"];
 
-let openCards = [];
-let matchedCards = 0;
-
 const cardsContainer = document.querySelector(".deck");
+const starsContainer = document.querySelector(".stars");
+const playAgain = document.querySelector(".playAgain"); // Button in Modal view
+const movesContainer = document.querySelector(".moves"); 
+const restartBtn = document.querySelector(".restart"); // Restart button on the Score Panel
+
+let startTime, endTime, seconds;
+
+let moves = 0; // Starting # of moves
+let openCards = []; // Array to save two opened cards
+let matchedCards = 0; // Number of matched cards
+let stars = 3; // Starting rating
+
+let modal = document.querySelector(".modal");
 
 // Start the game for the first time
 shuffle(cards);
@@ -49,7 +61,7 @@ function init() {
 function click(card) {
 	// Card click event
 	card.addEventListener("click", function(){
-		let currentCard = this;
+		let currentCard = this; 
 		let previousCard = openCards[0];
 
 		// One card has already been opened
@@ -76,7 +88,7 @@ function click(card) {
 					previousCard.classList.remove("open", "show", "disabled");
 				}, 500);
 			}
-		} else { 
+		} else {
 		// no card has been opened
 			card.classList.add("open", "show", "disabled");
 			openCards.push(this);
@@ -91,7 +103,7 @@ function click(card) {
  * Shuffle function from http://stackoverflow.com/a/2450976
  */
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -104,15 +116,9 @@ function shuffle(array) {
     return array;
 }
 
-
-///// Score Panel
-
-
 /*
  * Rating
  */
-const starsContainer = document.querySelector(".stars");
-var stars = 3; 
 function rating() {
 	switch(moves){
 		case 16: 
@@ -130,9 +136,7 @@ function rating() {
 /*
  * Moves
  */
-let moves = 0;
-const movesContainer = document.querySelector(".moves");
-movesContainer.innerHTML = 0;
+movesContainer.innerHTML = 0; 
 function addMove() {
 	moves++;
 	movesContainer.innerHTML = moves;
@@ -145,7 +149,6 @@ function addMove() {
  * Elapse game playing time. 
  * Inspired by https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript/41633001#comment70466060_41633001
  */
-var startTime, endTime, seconds;
 function start() {
 	startTime = new Date();
 }
@@ -153,21 +156,12 @@ function start() {
 function end() {
 	endTime = new Date();
 	//elapsed time in ms
-	var timeDiff = endTime - startTime; 
+	let timeDiff = endTime - startTime; 
 	// strip the ms
 	timeDiff /= 1000;
 
 	seconds = Math.round(timeDiff);
-	console.log(seconds + " seconds");
 }
-
-/*
- * Restart Button
- */
-const restartBtn = document.querySelector(".restart");
-restartBtn.addEventListener("click", restartGame);
-
-
 
 function restartGame() {
 	// Delete all cards
@@ -184,7 +178,7 @@ function restartGame() {
 	shuffle(cards);
 	// Call 'init' to create new cards
 	init();
-	// Reset all related variables
+	// Reset all related letiables
 	matchedCards = [];
 	moves = 0;
 	stars = 3;
@@ -194,13 +188,12 @@ function restartGame() {
 /*
  * Check if the game is over
  */
-var modal = document.querySelector(".modal");
 function gameOver() {
-	var content = document.querySelector(".content");
+	let content = document.querySelector(".content");
 
-	var totalMoves = document.querySelector(".movesValue");
-	var totalStars = document.querySelector(".ratingValue");
-	var totalTime = document.querySelector(".timeValue");
+	let totalMoves = document.querySelector(".movesValue");
+	let totalStars = document.querySelector(".ratingValue");
+	let totalTime = document.querySelector(".timeValue");
 	if (matchedCards === cards.length) {
 		end();
 		modal.classList.add("showModal");
@@ -210,10 +203,8 @@ function gameOver() {
 	}
 }
 
-
 /*
- * Modal view
- * Play again button
+ * Event Listeners
  */
-const playAgain = document.querySelector(".playAgain");
-playAgain.addEventListener("click", restartGame);
+playAgain.addEventListener("click", restartGame); // Play again button - modal view
+restartBtn.addEventListener("click", restartGame); // Restart Button - score panel
