@@ -2,28 +2,28 @@
 
 // List of all cards
 const cards = [
-	"fa fa-ambulance",
-	"fa fa-subway",
-	"fa fa-paper-plane",
-	"fa fa-ship",
-	"fa fa-taxi",
-	"fa fa-rocket",
-	"fa fa-motorcycle",
-	"fa fa-bicycle",
-	"fa fa-ambulance",
-	"fa fa-subway",
-	"fa fa-paper-plane",
-	"fa fa-ship",
-	"fa fa-taxi",
-	"fa fa-rocket",
-	"fa fa-motorcycle",
-	"fa fa-bicycle"];
+	'fa fa-ambulance',
+	'fa fa-subway',
+	'fa fa-paper-plane',
+	'fa fa-ship',
+	'fa fa-taxi',
+	'fa fa-rocket',
+	'fa fa-motorcycle',
+	'fa fa-bicycle',
+	'fa fa-ambulance',
+	'fa fa-subway',
+	'fa fa-paper-plane',
+	'fa fa-ship',
+	'fa fa-taxi',
+	'fa fa-rocket',
+	'fa fa-motorcycle',
+	'fa fa-bicycle'];
 
-const cardsContainer = document.querySelector(".deck");
-const starsContainer = document.querySelector(".stars");
-const playAgain = document.querySelector(".playAgain"); // Button in Modal view
-const movesContainer = document.querySelector(".moves"); 
-const restartBtn = document.querySelector(".restart"); // Restart button on the Score Panel
+const cardsContainer = document.querySelector('.deck');
+const starsContainer = document.querySelector('.stars');
+const playAgain = document.querySelector('.PlayAgain'); // Button in Modal view
+const movesContainer = document.querySelector('.moves'); 
+const restartBtn = document.querySelector('.restart'); // Restart button on the Score Panel
 
 let startTime, endTime, seconds;
 
@@ -32,12 +32,12 @@ let openCards = []; // Array to save two opened cards
 let matchedCards = 0; // Number of matched cards
 let stars = 3; // Starting rating
 
-let modal = document.querySelector(".modal");
+let modal = document.querySelector('.modal');
 
 // Start the game for the first time
 shuffle(cards);
 init();
-$(".card").on("click", start());
+$('.card').on('click', start());
 
 /*
  * Initialize the game
@@ -45,9 +45,9 @@ $(".card").on("click", start());
 function init() {
 	// Create a deck of cards
 	for (let i = 0; i < cards.length; i++){
-		const card = document.createElement("li");
-		card.classList.add("card");
-		card.innerHTML = `<i class ="${cards[i]}"></i>`;
+		const card = document.createElement('li');
+		card.classList.add('card');
+		card.innerHTML = `<i class ='${cards[i]}'></i>`;
 		cardsContainer.appendChild(card);
 
 		// Add click event to each card
@@ -60,20 +60,20 @@ function init() {
  */
 function click(card) {
 	// Card click event
-	card.addEventListener("click", function(){
+	card.addEventListener('click', function(){
 		let currentCard = this; 
 		let previousCard = openCards[0];
 
 		// One card has already been opened
 		if(openCards.length === 1){
-			card.classList.add("open", "show", "disabled");
+			card.classList.add('open', 'show', 'disabled');
 			openCards.push(this);
 
 			// Compare our 2 opened cards
 			if (this.innerHTML === openCards[0].innerHTML){
 				// Matched
-				currentCard.classList.add("match");
-				previousCard.classList.add("match");
+				currentCard.classList.add('match');
+				previousCard.classList.add('match');
 
 				openCards = [];
 				matchedCards += 2;
@@ -84,13 +84,13 @@ function click(card) {
 				// Do not match
 				openCards = [];
 				setTimeout(function() {
-					currentCard.classList.remove("open", "show", "disabled");
-					previousCard.classList.remove("open", "show", "disabled");
+					currentCard.classList.remove('open', 'show', 'disabled');
+					previousCard.classList.remove('open', 'show', 'disabled');
 				}, 500);
 			}
 		} else {
 		// no card has been opened
-			card.classList.add("open", "show", "disabled");
+			card.classList.add('open', 'show', 'disabled');
 			openCards.push(this);
 
 			// Add new move
@@ -122,12 +122,12 @@ function shuffle(array) {
 function rating() {
 	switch(moves){
 		case 16: 
-			starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
-				<li><i class="fa fa-star"></i></li>`;
+			starsContainer.innerHTML = `<li><i class='fa fa-star'></i></li>
+				<li><i class='fa fa-star'></i></li>`;
 			stars = 2;
 			break;
 		case 26:
-			starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>`;
+			starsContainer.innerHTML = `<li><i class='fa fa-star'></i></li>`;
 			stars = 1;
 			break;
 	}
@@ -165,13 +165,13 @@ function end() {
 
 function restartGame() {
 	// Delete all cards
-	cardsContainer.innerHTML = "";
+	cardsContainer.innerHTML = '';
 	// Reset rating
-	starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
-								<li><i class="fa fa-star"></i></li>
-								<li><i class="fa fa-star"></i></li>`;
+	starsContainer.innerHTML = `<li><i class='fa fa-star'></i></li>
+								<li><i class='fa fa-star'></i></li>
+								<li><i class='fa fa-star'></i></li>`;
 	//Hide modal window
-	modal.classList.remove("showModal");
+	modal.classList.remove('ShowModal');
 	// Reset moves
 	movesContainer.innerHTML = 0;
 	// Call shuffle
@@ -189,14 +189,14 @@ function restartGame() {
  * Check if the game is over
  */
 function gameOver() {
-	let content = document.querySelector(".content");
+	let content = document.querySelector('.content');
 
-	let totalMoves = document.querySelector(".movesValue");
-	let totalStars = document.querySelector(".ratingValue");
-	let totalTime = document.querySelector(".timeValue");
+	let totalMoves = document.querySelector('.MovesValue');
+	let totalStars = document.querySelector('.RatingValue');
+	let totalTime = document.querySelector('.TimeValue');
 	if (matchedCards === cards.length) {
 		end();
-		modal.classList.add("showModal");
+		modal.classList.add('ShowModal');
 		totalMoves.innerHTML = moves; 
 		totalStars.innerHTML = stars;
 		totalTime.innerHTML = seconds;
@@ -206,5 +206,5 @@ function gameOver() {
 /*
  * Event Listeners
  */
-playAgain.addEventListener("click", restartGame); // Play again button - modal view
-restartBtn.addEventListener("click", restartGame); // Restart Button - score panel
+playAgain.addEventListener('click', restartGame); // Play again button - modal view
+restartBtn.addEventListener('click', restartGame); // Restart Button - score panel
