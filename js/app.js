@@ -27,17 +27,20 @@ const restartBtn = document.querySelector('.restart'); // Restart button on the 
 
 let startTime, endTime, seconds;
 
+let counter = 0; // Counter for seconds 
 let moves = 0; // Starting # of moves
 let openCards = []; // Array to save two opened cards
 let matchedCards = 0; // Number of matched cards
 let stars = 3; // Starting rating
 
+let timer = document.querySelector('.timer');
 let modal = document.querySelector('.modal');
 
 // Start the game for the first time
 shuffle(cards);
 init();
 $('.card').on('click', start());
+$('.card').one('click', showTime());
 
 /*
  * Initialize the game
@@ -183,6 +186,7 @@ function restartGame() {
 	moves = 0;
 	stars = 3;
 	seconds = 0;
+	counter = 0;
 }
 
 /*
@@ -202,6 +206,19 @@ function gameOver() {
 		totalTime.innerHTML = seconds;
 	}
 }
+
+/*
+ * timer
+ */
+function showTime() {
+	counter = setInterval(increment, 1000);
+}
+
+function increment(){
+	timer.innerHTML = counter + ' <i class="fa fa-clock-o"></i>';
+	counter++;
+}
+
 
 /*
  * Event Listeners
