@@ -72,8 +72,8 @@ function click(card) {
 			// Compare our 2 opened cards
 			if (this.innerHTML === openCards[0].innerHTML){
 				// Matched
-				currentCard.classList.add('match');
-				previousCard.classList.add('match');
+				currentCard.classList.add('match', 'animated', 'bounceIn');
+				previousCard.classList.add('match', 'animated', 'bounceIn');
 				openCards = [];
 				matchedCards += 2;
 				// Check if the game is over
@@ -82,11 +82,11 @@ function click(card) {
 			} else{
 				// Do not match
 				openCards = [];
-				currentCard.classList.add('unmatch');
-				previousCard.classList.add('unmatch');
+				currentCard.classList.add('unmatch', 'animated', 'shake');
+				previousCard.classList.add('unmatch','animated', 'shake');
 				setTimeout(function() {
-					currentCard.classList.remove('open', 'show', 'disabled', 'unmatch');
-					previousCard.classList.remove('open', 'show', 'disabled', 'unmatch');
+					currentCard.classList.remove('open', 'show', 'disabled', 'unmatch', 'animated', 'shake');
+					previousCard.classList.remove('open', 'show', 'disabled', 'unmatch', 'animated', 'shake');
 				}, 500);
 			}
 		} else {
