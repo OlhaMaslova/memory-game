@@ -39,8 +39,7 @@ let modal = document.querySelector('.modal');
 // Start the game for the first time
 shuffle(cards);
 init();
-$('.card').on('click', start());
-$('.card').one('click', showTime());
+$('.card').on('click', start(), showTime());
 
 /*
  * Initialize the game
@@ -182,11 +181,14 @@ function restartGame() {
 	// Call 'init' to create new cards
 	init();
 	// Reset all related letiables
-	matchedCards = [];
+	openCards = [];
+	matchedCards = 0;
 	moves = 0;
 	stars = 3;
 	seconds = 0;
 	counter = 0;
+	// get a new starting time
+	start();
 }
 
 /*
