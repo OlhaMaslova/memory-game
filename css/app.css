@@ -68,6 +68,11 @@ li {
 	cursor: default;
 }
 
+.deck .card.unmatch {
+	background-color: #ef6767;
+	cursor: default;
+}
+
 .deck .card.disabled {
 	pointer-events: none;
 }

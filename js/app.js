@@ -74,7 +74,6 @@ function click(card) {
 				// Matched
 				currentCard.classList.add('match');
 				previousCard.classList.add('match');
-
 				openCards = [];
 				matchedCards += 2;
 				// Check if the game is over
@@ -83,9 +82,11 @@ function click(card) {
 			} else{
 				// Do not match
 				openCards = [];
+				currentCard.classList.add('unmatch');
+				previousCard.classList.add('unmatch');
 				setTimeout(function() {
-					currentCard.classList.remove('open', 'show', 'disabled');
-					previousCard.classList.remove('open', 'show', 'disabled');
+					currentCard.classList.remove('open', 'show', 'disabled', 'unmatch');
+					previousCard.classList.remove('open', 'show', 'disabled', 'unmatch');
 				}, 500);
 			}
 		} else {
