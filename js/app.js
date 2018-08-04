@@ -25,8 +25,6 @@ const playAgain = document.querySelector('.PlayAgain'); // Button in Modal view
 const movesContainer = document.querySelector('.moves'); 
 const restartBtn = document.querySelector('.restart'); // Restart button on the Score Panel
 
-let startTime, endTime, seconds;
-
 let counter = 0; // Counter for seconds 
 let moves = 0; // Starting # of moves
 let openCards = []; // Array to save two opened cards
@@ -39,7 +37,7 @@ let modal = document.querySelector('.modal');
 // Start the game for the first time
 shuffle(cards);
 init();
-$('.card').on('click', start(), showTime());
+$('.card').on('click', showTime());
 
 /*
  * Initialize the game
@@ -148,23 +146,8 @@ function addMove() {
 }
 
 /*
- * Elapse game playing time. 
- * Inspired by https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript/41633001#comment70466060_41633001
+ * Restart Game: Clear all dependencies
  */
-function start() {
-	startTime = new Date();
-}
-
-function end() {
-	endTime = new Date();
-	//elapsed time in ms
-	let timeDiff = endTime - startTime; 
-	// strip the ms
-	timeDiff /= 1000;
-
-	seconds = Math.round(timeDiff);
-}
-
 function restartGame() {
 	// Delete all cards
 	cardsContainer.innerHTML = '';
@@ -180,6 +163,8 @@ function restartGame() {
 	shuffle(cards);
 	// Call 'init' to create new cards
 	init();
+	// Start a new timer
+	showTime();
 	// Reset all related letiables
 	openCards = [];
 	matchedCards = 0;
@@ -187,8 +172,6 @@ function restartGame() {
 	stars = 3;
 	seconds = 0;
 	counter = 0;
-	// get a new starting time
-	start();
 }
 
 /*
@@ -201,11 +184,11 @@ function gameOver() {
 	let totalStars = document.querySelector('.RatingValue');
 	let totalTime = document.querySelector('.TimeValue');
 	if (matchedCards === cards.length) {
-		end();
 		modal.classList.add('ShowModal');
 		totalMoves.innerHTML = moves; 
 		totalStars.innerHTML = stars;
-		totalTime.innerHTML = seconds;
+		totalTime.innerHTML = counter;
+		clearInterval(intervalId);
 	}
 }
 
@@ -213,13 +196,15 @@ function gameOver() {
  * timer
  */
 function showTime() {
-	counter = setInterval(increment, 1000);
+	counter = 0;
+	intervalId = setInterval(increment, 1000);
 }
 
 function increment(){
-	timer.innerHTML = counter + ' <i class="fa fa-clock-o"></i>';
 	counter++;
+	timer.innerHTML = counter + ' <i class="fa fa-clock-o"></i>';
 }
+
 
 
 /*
