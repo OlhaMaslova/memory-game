@@ -29,7 +29,7 @@ let modal = document.querySelector('.modal');
 cards = cards.concat(cards);
 shuffle(cards);
 init();
-$('.card').on('click', showTime());
+showTime();
 
 /*
  * Initialize the game
