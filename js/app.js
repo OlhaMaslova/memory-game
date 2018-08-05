@@ -152,17 +152,22 @@ function restartGame() {
 	modal.classList.remove('ShowModal');
 	// Reset moves
 	movesContainer.innerHTML = 0;
+	// Reset timer to 0
+	timer.innerHTML = '0 <i class="fa fa-clock-o"></i>';
 	// Call shuffle
 	shuffle(cards);
 	// Call 'init' to create new cards
 	init();
+	// clear interval for timer
+	clearInterval(intervalId);
+	// Start a new timer
+	showTime();
 	// Reset all related letiables
 	openCards = [];
 	matchedCards = 0;
 	moves = 0;
 	stars = 3;
 	seconds = 0;
-	counter = 0;
 }
 
 /*
