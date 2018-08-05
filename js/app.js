@@ -1,7 +1,12 @@
 // Variables declaration
+const cardsContainer = document.querySelector('.deck');
+const starsContainer = document.querySelector('.stars');
+const playAgain = document.querySelector('.PlayAgain'); // Button in Modal view
+const movesContainer = document.querySelector('.moves'); 
+const restartBtn = document.querySelector('.restart'); // Restart button on the Score Panel
 
 // List of all cards
-const cards = [
+let cards = [
 	'fa fa-ambulance',
 	'fa fa-subway',
 	'fa fa-paper-plane',
@@ -10,12 +15,6 @@ const cards = [
 	'fa fa-rocket',
 	'fa fa-motorcycle',
 	'fa fa-bicycle'];
-
-const cardsContainer = document.querySelector('.deck');
-const starsContainer = document.querySelector('.stars');
-const playAgain = document.querySelector('.PlayAgain'); // Button in Modal view
-const movesContainer = document.querySelector('.moves'); 
-const restartBtn = document.querySelector('.restart'); // Restart button on the Score Panel
 
 let counter = 0; // Counter for seconds 
 let moves = 0; // Starting # of moves
@@ -27,6 +26,7 @@ let timer = document.querySelector('.timer');
 let modal = document.querySelector('.modal');
 
 // Start the game for the first time
+cards = cards.concat(cards);
 shuffle(cards);
 init();
 $('.card').on('click', showTime());
