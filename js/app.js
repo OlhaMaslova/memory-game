@@ -9,14 +9,6 @@ const cards = [
 	'fa fa-taxi',
 	'fa fa-rocket',
 	'fa fa-motorcycle',
-	'fa fa-bicycle',
-	'fa fa-ambulance',
-	'fa fa-subway',
-	'fa fa-paper-plane',
-	'fa fa-ship',
-	'fa fa-taxi',
-	'fa fa-rocket',
-	'fa fa-motorcycle',
 	'fa fa-bicycle'];
 
 const cardsContainer = document.querySelector('.deck');
@@ -164,8 +156,6 @@ function restartGame() {
 	shuffle(cards);
 	// Call 'init' to create new cards
 	init();
-	// Start a new timer
-	showTime();
 	// Reset all related letiables
 	openCards = [];
 	matchedCards = 0;
